@@ -65,15 +65,13 @@ git push -u origin main
 #    等 1~2 分钟，访问 https://你的用户名.github.io/ 即可
 ```
 
-## 配置评论区（giscus）
+## 评论区（giscus）
 
-1. 把仓库推送到 GitHub 并设为公开
-2. 仓库 → Settings → 勾选 **Discussions**（General 分类下）
-3. 打开 [giscus.app](https://giscus.app/zh-CN)，填入仓库名，按提示生成代码
-4. 用生成的 `<script>` 整体替换 `index.html`「留言」板块里的 giscus script（主要是填上 `data-repo-id` 和 `data-category-id`）
-5. 部署后首次访问，在该板块下点「Sign in with GitHub」初始化 Discussion
+已配置完成（仓库 `Ljdysq/Ljdysq.github.io`）。首次部署后，打开页面在「留言」板块点「Sign in with GitHub」初始化 Discussion。
 
-> 未配置时不影响页面：访客只会看到「评论区尚未配置」的提示文字。评论区主题会自动跟随本站亮暗模式。
+- 前提：仓库已勾选 Settings → **Discussions**，并已安装 [giscus GitHub App](https://github.com/apps/giscus)
+- 想改动配置（分类、排序、输入框位置等）：打开 [giscus.app](https://giscus.app/zh-CN) 重新生成代码，整体替换 `index.html`「留言」板块里的 `<script>`
+- 评论区主题会自动跟随本站亮暗模式（通过 postMessage 同步）
 
 ## 常见问题
 

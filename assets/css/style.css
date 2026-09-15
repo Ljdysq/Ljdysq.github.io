@@ -341,7 +341,6 @@ button:focus-visible {
 }
 
 /* ---------- 评论区（giscus） ---------- */
-.comments-tip { font-size: 0.9rem; color: var(--text-soft); }
 .giscus { margin-top: 18px; }
 
 /* ---------- 页脚 ---------- */
