@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你的昵称 · 个人主页</title>
+  <meta name="description" content="一句话介绍自己">
+
+  <!-- 社交分享卡片（OG）。TODO: 部署后把 og:image 换成真实图片（建议 1200×630，放 assets/images/og.png） -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="你的昵称 · 个人主页">
+  <meta property="og:description" content="一句话介绍自己">
+  <meta property="og:url" content="https://你的用户名.github.io/">
+  <meta property="og:image" content="https://你的用户名.github.io/assets/images/og.png">
+  <meta name="twitter:card" content="summary">
+
+  <!--
+    ★ 占位内容速查：在编辑器中全局搜索「你的」，即可找到全部需要替换的地方
+    （昵称 / 介绍 / GitHub 用户名 / 邮箱 / OG 分享卡片 / 项目 / 文章 / 动态 / giscus）
+  -->
+
+  <!-- 主题初始化：必须在 CSS 加载前执行，避免暗色用户看到白屏闪烁（请勿移到 main.js） -->
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) { /* 忽略隐私模式下可能的异常 */ }
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <!-- 字体：jsDelivr CDN（国内可访问），浏览器按需只下载用到的那部分中文字体子集。
+       想完全离线？把 fontsource 包下载到本地 assets/fonts/ 后改成本地路径即可 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ma-shan-zheng@5/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5/400.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5/600.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5/700.css">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- 科技蓝圆点 favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%234f7fe8'/%3E%3C/svg%3E">
+</head>
+<body>
+  <!-- 右上角：亮色 / 暗色主题切换按钮（也可按键盘 T 键） -->
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切换亮色 / 暗色主题" title="切换主题（快捷键 T）">🌙</button>
+
+  <main class="container">
+    <!-- ==================== 头像 / 昵称 / 一句话介绍 ==================== -->
+    <header class="hero">
+      <!-- TODO: 把下面的 src 换成你自己的头像，例如 src="assets/images/avatar.png" -->
+      <img class="avatar" alt="头像占位图"
+           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23eef2f8'/%3E%3Ccircle cx='100' cy='82' r='36' fill='%234f7fe8'/%3E%3Cpath d='M34 196a66 66 0 0 1 132 0' fill='%234f7fe8'/%3E%3C/svg%3E">
+
+      <p class="greeting" id="greeting">你好，我是</p>
+      <h1 class="nickname">你的昵称</h1>
+      <p class="intro"><span id="typed-intro">一句话介绍自己</span><span class="type-cursor" aria-hidden="true"></span></p>
+
+      <nav class="social" aria-label="社交链接">
+        <!-- 替换成你自己的 GitHub 主页地址 -->
+        <a href="https://github.com/你的用户名" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+        <!-- 替换成你自己的邮箱 -->
+        <a href="mailto:你的邮箱@example.com">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.708 2.825L15 11.105V5.383zm-.034 6.876-5.64-3.47L8 9.667l-1.326-.878-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383v5.722z"/></svg>
+          邮箱
+        </a>
+      </nav>
+    </header>
+
+    <!-- ==================== 关于我 ==================== -->
+    <section class="section">
+      <h2 class="section-title">关于我</h2>
+      <div class="about">
+        <p>这里写一段自我介绍：你是谁、在做什么、正在学什么。两三句话即可，真诚比华丽更重要。</p>
+        <p>这里写第二段：你的兴趣、业余爱好，或你希望访客记住你的一件事。</p>
+      </div>
+      <div class="skill-list" aria-label="技能标签">
+        <!-- TODO: 换成你自己的技能，复制 <span>…</span> 即可增删 -->
+        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Python</span><span>替换成你的技能</span>
+      </div>
+    </section>
+
+    <!-- ==================== 最近的项目 ==================== -->
+    <section class="section">
+      <h2 class="section-title">最近的项目</h2>
+      <!-- TODO: 项目卡片模板，复制一整个 <article class="project-card">…</article> 即可增删 -->
+      <div class="project-grid">
+        <article class="project-card">
+          <h3 class="project-name">项目名称一</h3>
+          <p class="project-desc">用一两句话描述这个项目做了什么、解决了什么问题。</p>
+          <div class="project-tags"><span>标签一</span><span>标签二</span></div>
+          <a class="project-link" href="https://github.com/你的用户名/项目名" target="_blank" rel="noopener">查看项目 →</a>
+        </article>
+        <article class="project-card">
+          <h3 class="project-name">项目名称二</h3>
+          <p class="project-desc">用一两句话描述这个项目做了什么、解决了什么问题。</p>
+          <div class="project-tags"><span>标签一</span></div>
+          <a class="project-link" href="https://github.com/你的用户名/项目名" target="_blank" rel="noopener">查看项目 →</a>
+        </article>
+        <article class="project-card">
+          <h3 class="project-name">项目名称三</h3>
+          <p class="project-desc">用一两句话描述这个项目做了什么、解决了什么问题。</p>
+          <div class="project-tags"><span>标签一</span><span>标签二</span><span>标签三</span></div>
+          <a class="project-link" href="https://github.com/你的用户名/项目名" target="_blank" rel="noopener">查看项目 →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== 最近的文章 ==================== -->
+    <section class="section">
+      <h2 class="section-title">最近的文章</h2>
+      <!-- TODO: 每篇文章复制一个 <li>…</li>；链接可指向掘金 / 知乎 / 独立博客 -->
+      <ul class="post-list">
+        <li>
+          <a href="https://你的博客地址/文章一" target="_blank" rel="noopener">
+            <span class="post-title">文章标题一</span>
+            <span class="post-meta">2026-09-01 · 掘金</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://你的博客地址/文章二" target="_blank" rel="noopener">
+            <span class="post-title">文章标题二</span>
+            <span class="post-meta">2026-08-15 · 知乎</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://你的博客地址/文章三" target="_blank" rel="noopener">
+            <span class="post-title">文章标题三</span>
+            <span class="post-meta">2026-07-20 · 博客</span>
+          </a>
+        </li>
+      </ul>
+      <p class="post-more">还没有自己的博客？从 <a href="https://juejin.cn/" target="_blank" rel="noopener">掘金</a> 或 <a href="https://zhuanlan.zhihu.com/" target="_blank" rel="noopener">知乎专栏</a> 开始写起吧。</p>
+    </section>
+
+    <!-- ==================== 最新动态 ==================== -->
+    <section class="section">
+      <h2 class="section-title">最新动态</h2>
+      <!-- TODO: 时间线模板，建议按时间倒序填写，复制 <li>…</li> 即可增删 -->
+      <ul class="timeline">
+        <li>
+          <span class="timeline-date">2026-09-15</span>
+          <p>在这里写一条动态，比如「个人主页上线啦」「开源了某个小工具」……</p>
+        </li>
+        <li>
+          <span class="timeline-date">2026-08-01</span>
+          <p>在这里写一条动态，比如「发布了项目名称一」……</p>
+        </li>
+        <li>
+          <span class="timeline-date">2026-07-10</span>
+          <p>在这里写一条动态，比如「开始写博客」「入职新公司」……</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ==================== 留言 ==================== -->
+    <section class="section">
+      <h2 class="section-title">留言</h2>
+      <!--
+        TODO: 配置 giscus 评论区（步骤见 README「配置评论区（giscus）」）：
+        1. 把仓库推送到 GitHub 并设为公开
+        2. 仓库 Settings → 勾选 Discussions
+        3. 打开 https://giscus.app/zh-CN 填写仓库名，用生成的代码整体替换下面这个 <script>
+        配置完成前，访客只会看到下方一行提示文字，不影响页面其他功能
+      -->
+      <p class="comments-tip">评论区尚未配置。有话想说？欢迎 <a href="mailto:你的邮箱@example.com">发邮件给我</a>。</p>
+      <div class="giscus">
+        <script src="https://giscus.app/client.js"
+                data-repo="你的用户名/你的用户名.github.io"
+                data-repo-id=""
+                data-category="Announcements"
+                data-category-id=""
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="zh-CN"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </section>
+
+    <!-- ==================== 页脚 ==================== -->
+    <footer class="footer">
+      <!-- 每日一言：来自 hitokoto.cn 的免费接口，加载失败时自动显示下面这句默认文案 -->
+      <blockquote class="quote" id="daily-quote">
+        <p>「种一棵树最好的时间是十年前，其次是现在。」</p>
+        <p class="quote-from">—— 佚名</p>
+      </blockquote>
+
+      <!-- 替换成你自己的邮箱 -->
+      <a class="btn-accent" href="mailto:你的邮箱@example.com">✉️ 写信给我</a>
+
+      <!-- 访问统计（不蒜子）：第三方免费服务，不想要直接删掉这行 div 和底部 busuanzi 的 script 即可 -->
+      <div class="footer-counters">
+        <span id="busuanzi_container_site_pv">本站被访问 <span id="busuanzi_value_site_pv"></span> 次</span>
+        <span class="counters-dot">·</span>
+        <span id="busuanzi_container_site_uv">共 <span id="busuanzi_value_site_uv"></span> 位朋友来过</span>
+      </div>
+
+      <p>© <span id="year">2026</span> 你的昵称 · 最后更新：<span id="last-updated">…</span></p>
+    </footer>
+  </main>
+
+  <!-- 不蒜子访问统计（第三方服务，删除这行即可移除统计） -->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
