@@ -2,7 +2,7 @@
    个人主页 · 交互脚本
    1. 亮色 / 暗色主题切换（localStorage 记忆，支持键盘 T 快捷键，giscus 跟随）
    2. 问候语随时间变化 + 一句话介绍打字机效果
-   3. 页脚「最后更新时间」、年份、每日一言、点击涟漪
+   3. 页脚「最后更新时间」、年份、金句轮换、点击涟漪
    ========================================================================== */
 
 (function () {
@@ -86,21 +86,49 @@
     }
   }
 
-  /* ---------- 3. 每日一言（hitokoto.cn 免费接口） ---------- */
+  /* ---------- 3. 页脚金句：LOL / 王者荣耀台词 + 废话文学，本地随机轮换（点击换一条） ---------- */
   var quote = document.getElementById('daily-quote');
   if (quote) {
     var quoteText = quote.querySelector('p');
     var quoteFrom = quote.querySelector('.quote-from');
-    var controller = new AbortController();
-    var timeout = setTimeout(function () { controller.abort(); }, 4000);
-    fetch('https://v1.hitokoto.cn/', { signal: controller.signal })
-      .then(function (res) { return res.json(); })
-      .then(function (data) {
-        clearTimeout(timeout);
-        if (quoteText) quoteText.textContent = '「' + data.hitokoto + '」';
-        if (quoteFrom && data.from) quoteFrom.textContent = '—— ' + data.from;
-      })
-      .catch(function () { /* 加载失败时保留 HTML 中的默认句子 */ });
+    var QUOTES = [
+      { text: '坚如磐石。', from: '墨菲特 · 英雄联盟' },
+      { text: '俺也是从石头里蹦出来的，为啥不是猴子呢？', from: '墨菲特 · 英雄联盟' },
+      { text: '我已经是全速前进了！', from: '墨菲特 · 英雄联盟' },
+      { text: '这就是和石头战斗的代价！', from: '墨菲特 · 英雄联盟' },
+      { text: '王牌飞行员，申请出战！', from: '库奇 · 英雄联盟' },
+      { text: '现在的我已经飙到极限了！', from: '库奇 · 英雄联盟' },
+      { text: '大部分人都会打飞机，这对飞机来说很不公平！', from: '库奇 · 英雄联盟' },
+      { text: '你买单，我就来！', from: '古拉加斯 · 英雄联盟' },
+      { text: '欢乐时光就要开始了！', from: '古拉加斯 · 英雄联盟' },
+      { text: '死亡如风，常伴吾身。', from: '亚索 · 英雄联盟' },
+      { text: '双眼失明丝毫不影响我追捕敌人。', from: '李青 · 英雄联盟' },
+      { text: '无形之刃，最为致命。', from: '劫 · 英雄联盟' },
+      { text: '我于杀戮之中盛放，亦如黎明中的花朵。', from: '烬 · 英雄联盟' },
+      { text: '无敌的我，又迷路了。', from: '宫本武藏 · 王者荣耀' },
+      { text: '鲁班大师，智商二百五。', from: '鲁班七号 · 王者荣耀' },
+      { text: '星光荡开宇宙，本人闪耀其中。', from: '曜 · 王者荣耀' },
+      { text: '那些打不死我的，一直在打我。', from: '佚名' },
+      { text: '把自卑的人翻过来会变成一个卑自。', from: '佚名' },
+      { text: '据我所知，我一无所知。', from: '佚名' },
+      { text: '一想到马上要睡着了，就兴奋得睡不着。', from: '佚名' },
+      { text: '收徒啥也不教。', from: '佚名' },
+      { text: '恭喜你，被我恭喜到了。', from: '佚名' },
+      { text: '作为一个过来人，我给的建议是别过来。', from: '佚名' },
+      { text: '世上无难事，只要肯放弃。', from: '佚名' },
+      { text: '你的背后一定有你的屁股。', from: '佚名' },
+      { text: '但凡有一点办法，也不至于一点办法都没有。', from: '佚名' }
+    ];
+    var lastIndex = -1;
+    function rollQuote() {
+      var i;
+      do { i = Math.floor(Math.random() * QUOTES.length); } while (i === lastIndex && QUOTES.length > 1);
+      lastIndex = i;
+      if (quoteText) quoteText.textContent = '「' + QUOTES[i].text + '」';
+      if (quoteFrom) quoteFrom.textContent = '—— ' + QUOTES[i].from;
+    }
+    quote.addEventListener('click', rollQuote);
+    rollQuote();
   }
 
   /* ---------- 4. 点击涟漪 ---------- */

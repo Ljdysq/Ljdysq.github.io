@@ -356,7 +356,7 @@ button:focus-visible {
 }
 
 /* 每日一言 */
-.quote { margin: 0; padding: 0; font-size: 0.95rem; color: var(--text); }
+.quote { margin: 0; padding: 0; font-size: 0.95rem; color: var(--text); cursor: pointer; }
 .quote-from { margin-top: 6px; font-size: 0.82rem; color: var(--text-soft); }
 
 /* 实底科技蓝按钮（页脚联系 / 404 返回首页共用） */
