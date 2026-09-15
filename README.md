@@ -78,7 +78,7 @@ git push -u origin main
 
 右下角悬浮球接入了扣子 Web SDK，访客免登录即可和「你的 AI 分身」聊天。智能体托管在 Coze，本站只嵌入官方 SDK，无后端。
 
-- 架构：token 不写死在源码里，由 Cloudflare Worker 动态下发（`coze-token.2392359346lxc.workers.dev/token`），PAT 加密存储在 Worker 的 Secret `COZE_PAT` 中；源码里只有 `bot_id` 和 Worker 地址
+- 架构：token 不写死在源码里，由 Cloudflare Worker 动态下发（`token.ljdysq.top/token`，自定义域名，国内网络可直连），PAT 加密存储在 Worker 的 Secret `COZE_PAT` 中；源码里只有 `bot_id` 和 Worker 地址
 - 配置位置：`index.html` 底部「AI 分身」注释块里的 `bot_id` 和 `TOKEN_URL`（换 Worker 时改这里）
 - 换令牌：扣子后台「扣子API」→「个人访问令牌」→ 撤销旧令牌 → 新建（建议最小权限：只勾「会话」「消息」）→ Cloudflare 控制台 Worker → 设置 → 变量和机密 → 覆盖 `COZE_PAT` → 重新部署
 - 获取方法：

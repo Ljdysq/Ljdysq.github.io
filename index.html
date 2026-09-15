@@ -231,7 +231,7 @@
     // token 由 Cloudflare Worker 动态下发，并每 30 分钟后台刷新一次缓存。
     // 手机弱网下单次请求容易失败，所以：token 获取失败自动重试（1s/3s/8s 共 4 次尝试）、
     // SDK 脚本没加载好就轮询等待并自动重拉、断网恢复后自动再试，避免悬浮球偶发不显示。
-    var TOKEN_URL = 'https://coze-token.2392359346lxc.workers.dev/token';
+    var TOKEN_URL = 'https://token.ljdysq.top/token';
     var SDK_URL = 'https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.10/libs/cn/index.js';
     var latestToken = '';
 
@@ -291,7 +291,8 @@
         componentProps: {
           title: '我的 AI 分身',
           lang: 'zh-CN',
-          width: 400,
+          // 移动端窄屏自适应：桌面 400px，手机按屏幕宽度来（官方移动端适配建议）
+          width: window.innerWidth < 600 ? Math.min(400, window.innerWidth) : 400,
         },
       });
     };
